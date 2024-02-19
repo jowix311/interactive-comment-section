@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Button, Grid, Typography, styled } from "@mui/material";
+import "./App.css"; // TODO maybe remove this
+
+const VoteButton = styled(Button)(({ theme }) => ({
+  backgroundColor: "transparent",
+  width: "auto",
+  opacity: 0.5,
+  fontWeight: 700,
+}));
+
+//NOTE: adding the "container" prop makes the flexbox work
+//NOTE breakpoint .up means "min-width"
+const VoteButtonContainer = styled(Grid)(({ theme }) => ({
+  backgroundColor: theme.palette.grey[50],
+  flexDirection: "row",
+  borderRadius: "6px",
+  [theme.breakpoints.up("lg")]: {
+    flexDirection: "column",
+  },
+}));
+
+const VoteCount = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  fontWeight: 700,
+}));
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <VoteButtonContainer
+        container
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <VoteButton>+</VoteButton>
+        <VoteCount>12</VoteCount>
+        <VoteButton>-</VoteButton>
+      </VoteButtonContainer>
+      {/* <Grid container spacing={2}>
+        <Grid xs={1}>yrf</Grid>
+        <Grid xs={10}>
+          <Paper>TEST</Paper>
+        </Grid>
+        <Grid xs={1}>
+          <Paper>ZZ</Paper>
+        </Grid>
+      </Grid> */}
+      <h1>Test Test</h1>
+      <Button variant="contained">Send</Button>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

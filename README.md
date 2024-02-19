@@ -17,14 +17,34 @@ If you are developing a production application, we recommend updating the config
 export default {
   // other rules...
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: ["./tsconfig.json", "./tsconfig.node.json"],
     tsconfigRootDir: __dirname,
   },
-}
+};
 ```
 
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+Feb 18
+
+- MUI
+- Adding font with MUI and get know about font source https://fontsource.org/fonts/rubik/install
+  - https://blog.logrocket.com/add-custom-fonts-mui/
+  - https://surajsharma.net/blog/react-material-ui-custom-font
+  - search for allVairants: https://stackoverflow.com/questions/48319372/changing-font-family-of-all-material-ui-components
+  - adding custom Palette https://stackoverflow.com/questions/50069724/how-to-add-custom-material-ui-palette-colors
+- COOL override example https://mui.com/material-ui/react-grid/
+
+- Methods (https://www.youtube.com/watch?v=HsdjivqQ7BA)
+  - #1 component props
+  - #2 using `sx` prop
+  - #3 using styled function (if you fin using sx to messy)
+  - #4 CSS function of EmotionUI css={css`background-color: red`}
+    - you need to add extra rule sto remove linting errors
+  - #5 Normal CSS
+  - #6 CSS modules (to co locate CSS e.g., page.module.css)
+  - #7 Theme (suggested way!)
