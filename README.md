@@ -39,6 +39,13 @@ Feb 18
   - adding custom Palette https://stackoverflow.com/questions/50069724/how-to-add-custom-material-ui-palette-colors
 - COOL override example https://mui.com/material-ui/react-grid/
 
+Feb 20
+- Learned how to add custom SVF to MUI using SvgIconm
+- Figuring how to use SVGR on vite
+  - https://stackoverflow.com/questions/38510443/how-to-use-an-svg-file-in-a-svgicon-in-material-ui
+  - https://www.npmjs.com/package/vite-plugin-svgr
+  - https://stackoverflow.com/questions/74720726/type-definition-for-vite-plugin-svgr
+
 - Methods (https://www.youtube.com/watch?v=HsdjivqQ7BA)
   - #1 component props
   - #2 using `sx` prop

@@ -1,41 +1,11 @@
-import { Button, Grid, Typography, styled } from "@mui/material";
+import { Button } from "@mui/material";
 import "./App.css"; // TODO maybe remove this
-
-const VoteButton = styled(Button)(({ theme }) => ({
-  backgroundColor: "transparent",
-  width: "auto",
-  opacity: 0.5,
-  fontWeight: 700,
-}));
-
-//NOTE: adding the "container" prop makes the flexbox work
-//NOTE breakpoint .up means "min-width"
-const VoteButtonContainer = styled(Grid)(({ theme }) => ({
-  backgroundColor: theme.palette.grey[50],
-  flexDirection: "row",
-  borderRadius: "6px",
-  [theme.breakpoints.up("lg")]: {
-    flexDirection: "column",
-  },
-}));
-
-const VoteCount = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  fontWeight: 700,
-}));
+import CommentVoteControl from "./components/comment-vote-control";
 
 function App() {
   return (
     <>
-      <VoteButtonContainer
-        container
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <VoteButton>+</VoteButton>
-        <VoteCount>12</VoteCount>
-        <VoteButton>-</VoteButton>
-      </VoteButtonContainer>
+      <CommentVoteControl />
       {/* <Grid container spacing={2}>
         <Grid xs={1}>yrf</Grid>
         <Grid xs={10}>
