@@ -1,11 +1,13 @@
 import { Button } from "@mui/material";
 import "./App.css"; // TODO maybe remove this
-import CommentVoteControl from "./components/comment-vote-control";
+
+import Comment from "./comment/comment";
 
 function App() {
   return (
     <>
-      <CommentVoteControl />
+      <Comment />
+
       {/* <Grid container spacing={2}>
         <Grid xs={1}>yrf</Grid>
         <Grid xs={10}>

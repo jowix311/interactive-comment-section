@@ -40,13 +40,24 @@ Feb 18
 - COOL override example https://mui.com/material-ui/react-grid/
 
 Feb 20
+
 - Learned how to add custom SVF to MUI using SvgIconm
 - Figuring how to use SVGR on vite
   - https://stackoverflow.com/questions/38510443/how-to-use-an-svg-file-in-a-svgicon-in-material-ui
   - https://www.npmjs.com/package/vite-plugin-svgr
   - https://stackoverflow.com/questions/74720726/type-definition-for-vite-plugin-svgr
+- IconSVG not centered
+  - https://stackoverflow.com/questions/64327446/how-to-center-align-a-custom-svg-icon-in-a-material-ui-iconbutton
+- SVG viewbox
+  - https://www.youtube.com/watch?v=6LCUStriM_o
+- Went a ahead and use button and icon combo
+
+Feb 22
+
+- Make MUI bold https://surajsharma.net/blog/react-material-ui-typography-bold
 
 - Methods (https://www.youtube.com/watch?v=HsdjivqQ7BA)
+
   - #1 component props
   - #2 using `sx` prop
   - #3 using styled function (if you fin using sx to messy)
@@ -55,3 +66,8 @@ Feb 20
   - #5 Normal CSS
   - #6 CSS modules (to co locate CSS e.g., page.module.css)
   - #7 Theme (suggested way!)
+
+  Feb 23
+
+  - MUI grid template name
+    - https://mui.com/system/grid/

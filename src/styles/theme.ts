@@ -38,13 +38,14 @@ const theme = createTheme({
     },
   },
   components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          ":hover": { opacity: 0.8 },
-        },
-      },
-    },
+    //NOTE keeping the commented out code for reference
+    // MuiButton: {
+    //   styleOverrides: {
+    //     root: {
+    //       ":hover": { opacity: 0.8 },
+    //     },
+    //   },
+    // },
   },
 });
 
