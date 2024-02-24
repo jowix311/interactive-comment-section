@@ -7,6 +7,7 @@ import imageAmy from "../assets/images/avatars/image-amyrobson.png";
 
 import { Box, styled } from "@mui/material";
 import CommentContent from "./comment-content";
+import { useAppSelector } from "../store/hooks";
 
 const CommentContainer = styled(Box)(() => ({
   display: "grid",
@@ -19,6 +20,11 @@ const CommentContainer = styled(Box)(() => ({
 }));
 
 const Comment = () => {
+  const { comments } = useAppSelector((state) => state.comment);
+
+  //TODO remove this when Redux is implemented
+  // const dispatch = useAppDispatch();
+
   //TODO refactor this to use a prop and remove the dummy data
   const dummyProfile = {
     profileImageSource: imageAmy,
@@ -26,6 +32,9 @@ const Comment = () => {
     isOwnComment: false,
     commentAge: "1 week ago",
   };
+
+  //TODO remove console.log
+  console.log(comments);
 
   return (
     <>
