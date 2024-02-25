@@ -73,3 +73,5 @@ Feb 22
     - https://mui.com/system/grid/
 
   # Feb 24
+  - learned some about vite program
+    - https://vitejs.dev/guide/assets

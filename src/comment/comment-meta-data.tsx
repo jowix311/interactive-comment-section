@@ -21,6 +21,7 @@ const CommentMetaData = ({
   profileName,
   commentAge,
 }: CommentMetaDataProps) => {
+  console.log("profileImageSource", profileImageSource);
   return (
     <Grid
       container
@@ -29,7 +30,7 @@ const CommentMetaData = ({
       gap="16px"
       component="section"
     >
-      <Avatar alt="Remy Sharp" src={profileImageSource} />
+      <Avatar alt={profileName} src={profileImageSource} />
       <ProfileName>{profileName}</ProfileName>
       <CommentAge>{commentAge}</CommentAge>
     </Grid>

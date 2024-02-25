@@ -2,6 +2,10 @@ import { Button, Grid, Typography, styled } from "@mui/material";
 import IconPlus from "../assets/images/icon-plus.svg?react"; //NOTE yes we need the ?react in order to use the svg as a component
 import IconMinus from "../assets/images/icon-minus.svg?react";
 
+interface CommentVoteControlProps {
+  voteCount: number;
+}
+
 const VoteButton = styled(Button)(() => ({
   backgroundColor: "transparent",
   fontWeight: 700,
@@ -31,7 +35,7 @@ const VoteCount = styled(Typography)(({ theme }) => ({
   padding: "8px 0 8px 0",
 }));
 
-const CommentVoteControl = () => {
+const CommentVoteControl = ({ voteCount }: CommentVoteControlProps) => {
   return (
     <VoteButtonContainer
       container
@@ -41,7 +45,7 @@ const CommentVoteControl = () => {
       <VoteButton aria-label="up vote comment">
         <IconPlus />
       </VoteButton>
-      <VoteCount>12</VoteCount>
+      <VoteCount>{voteCount}</VoteCount>
       <VoteButton aria-label="down vote comment">
         <IconMinus />
       </VoteButton>

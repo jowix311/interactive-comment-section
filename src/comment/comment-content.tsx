@@ -7,12 +7,12 @@ const CommentText = styled(Typography)(({ theme }) => ({
   fontWeight: 500,
 }));
 
-const CommentContent = () => {
-  return (
-    <CommentText>
-      Impressive! Though it seems the drag feature could be improved.
-    </CommentText>
-  );
+interface CommentContentProps {
+  commentText: string;
+}
+
+const CommentContent = ({ commentText }: CommentContentProps) => {
+  return <CommentText>{commentText}</CommentText>;
 };
 
 export default CommentContent;
