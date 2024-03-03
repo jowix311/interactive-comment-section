@@ -117,20 +117,49 @@ const initialState: State = {
     },
   ],
 };
+//TODO: Refactor UpVote and DownVote to be a single function
+const handleCommentVote = (comment: Comment, isUpVoted: boolean) => {
+  return {
+    ...comment,
+    hasUpVoted: isUpVoted,
+    hasDownVoted: !isUpVoted,
+    score: isUpVoted ? comment.score + 1 : comment.score - 1,
+  };
+};
 
 export const commentSlice = createSlice({
   name: "comments",
   initialState,
   reducers: {
     upVoteComment: (state, action) => {
-      console.log("upVoteComment", action);
-      console.log("state", state);
+      const { commentId } = action.payload;
 
-      return {...initialState}
+      state.comments = state.comments.map((comment) => {
+        if (comment.id === commentId) {
+          return handleCommentVote(comment, true);
+        }
+
+        return comment;
+      });
+
+      return state;
     },
-  }, //TODO add the reducers
+    downVoteComment: (state, action) => {
+      const { commentId } = action.payload;
+
+      state.comments = state.comments.map((comment) => {
+        if (comment.id === commentId) {
+          return handleCommentVote(comment, false);
+        }
+
+        return comment;
+      });
+
+      return state;
+    },
+  },
 });
 
-export const { upVoteComment } = commentSlice.actions;
+export const { upVoteComment, downVoteComment } = commentSlice.actions;
 
 export const selectCommentReducer = commentSlice.reducer;

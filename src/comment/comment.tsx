@@ -4,8 +4,7 @@ import CommentReplyButton from "./comment-reply-button";
 import { Box, styled } from "@mui/material";
 import CommentContent from "./comment-content";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
-import { upVoteComment } from "./comment.reducer";
-import { useEffect } from "react";
+import { upVoteComment, downVoteComment } from "./comment.reducer";
 
 const CommentContainer = styled(Box)(() => ({
   display: "grid",
@@ -16,21 +15,20 @@ const CommentContainer = styled(Box)(() => ({
     "comment comment comment"
     "control . reply"`,
 }));
-
+//NOTe we only handle one level of replies for now
 const Comment = () => {
   const { currentUser, comments } = useAppSelector((state) => state.comment);
 
   //TODO remove this when Redux is implemented
   const dispatch = useAppDispatch();
 
-  const handleCommentUpVote = () => {
-    //TODO dispatch upVoteComment
-    dispatch(upVoteComment({ test: "test" }));
+  const handleCommentUpVote = (commentId: number | string) => {
+    dispatch(upVoteComment({ commentId: commentId }));
   };
 
-  useEffect(() => {
-    handleCommentUpVote();
-  }, []);
+  const handleCommentDownVote = (commentId: number | string) => {
+    dispatch(downVoteComment({ commentId: commentId }));
+  };
 
   //NOTE We could add some loading UI on the future
   return (
@@ -41,6 +39,8 @@ const Comment = () => {
           content,
           createdAt,
           score,
+          hasUpVoted,
+          hasDownVoted,
           user: {
             username,
             image: { png },
@@ -59,7 +59,14 @@ const Comment = () => {
               <CommentContent commentText={content} />
             </Box>
             <Box sx={{ gridArea: "control" }}>
-              <CommentVoteControl voteCount={score} />
+              <CommentVoteControl
+                commentId={id}
+                voteCount={score}
+                hasUpVoted={hasUpVoted}
+                hasDownVoted={hasDownVoted}
+                handleUpVote={handleCommentUpVote}
+                handleDownVote={handleCommentDownVote}
+              />
             </Box>
             <Box sx={{ gridArea: "reply", textAlign: "right" }}>
               <CommentReplyButton />

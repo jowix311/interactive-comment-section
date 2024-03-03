@@ -21,7 +21,6 @@ const CommentMetaData = ({
   profileName,
   commentAge,
 }: CommentMetaDataProps) => {
-  console.log("profileImageSource", profileImageSource);
   return (
     <Grid
       container

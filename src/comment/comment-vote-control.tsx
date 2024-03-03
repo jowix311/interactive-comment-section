@@ -3,7 +3,13 @@ import IconPlus from "../assets/images/icon-plus.svg?react"; //NOTE yes we need 
 import IconMinus from "../assets/images/icon-minus.svg?react";
 
 interface CommentVoteControlProps {
+  commentId: number | string;
+  commentParentId?: number | string;
   voteCount: number;
+  hasUpVoted: boolean;
+  hasDownVoted: boolean;
+  handleUpVote: (commentId: number | string) => void;
+  handleDownVote: (commentId: number | string) => void;
 }
 
 const VoteButton = styled(Button)(() => ({
@@ -11,6 +17,10 @@ const VoteButton = styled(Button)(() => ({
   fontWeight: 700,
   minWidth: "auto",
   maxWidth: "48px",
+  opacity: 0.5,
+  "&:hover": {
+    opacity: 1,
+  },
 }));
 
 //NOTE: adding the "container" prop makes the flexbox work
@@ -35,18 +45,33 @@ const VoteCount = styled(Typography)(({ theme }) => ({
   padding: "8px 0 8px 0",
 }));
 
-const CommentVoteControl = ({ voteCount }: CommentVoteControlProps) => {
+const CommentVoteControl = ({
+  commentId,
+  voteCount,
+  hasUpVoted,
+  hasDownVoted,
+  handleUpVote,
+  handleDownVote,
+}: CommentVoteControlProps) => {
   return (
     <VoteButtonContainer
       container
       alignItems="center"
       justifyContent="space-between"
     >
-      <VoteButton aria-label="up vote comment">
+      <VoteButton
+        aria-label="up vote comment"
+        disabled={hasUpVoted}
+        onClick={() => handleUpVote(commentId)}
+      >
         <IconPlus />
       </VoteButton>
       <VoteCount>{voteCount}</VoteCount>
-      <VoteButton aria-label="down vote comment">
+      <VoteButton
+        aria-label="down vote comment"
+        disabled={hasDownVoted}
+        onClick={() => handleDownVote(commentId)}
+      >
         <IconMinus />
       </VoteButton>
     </VoteButtonContainer>
