@@ -36,7 +36,6 @@ const CommentReplySection = styled(Box)(({ theme }) => ({
 const Comment = () => {
   const { currentUser, comments } = useAppSelector((state) => state.comment);
 
-  //TODO remove this when Redux is implemented
   const dispatch = useAppDispatch();
 
   const handleCommentUpVote = (commentId: number | string) => {
@@ -44,7 +43,11 @@ const Comment = () => {
   };
 
   const handleCommentDownVote = (commentId: number | string) => {
-    dispatch(downVoteComment({ commentId: commentId }));
+    dispatch(
+      downVoteComment({
+        commentId: commentId,
+      })
+    );
   };
 
   // Prevent repeating codes for rendering parent comment  and replies
