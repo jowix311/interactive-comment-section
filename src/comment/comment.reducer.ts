@@ -9,7 +9,7 @@ type User = {
   username: string;
 };
 
-type Reply = {
+export type Reply = {
   id: number;
   content: string;
   createdAt: string;
@@ -20,7 +20,7 @@ type Reply = {
   user: User;
 };
 
-type Comment = {
+export type Comment = {
   id: number;
   content: string;
   createdAt: string;

@@ -75,3 +75,6 @@ Feb 22
   # Feb 24
   - learned some about vite program
     - https://vitejs.dev/guide/assets
+
+Mar 4
+ - Added replies and refactored code for rendering comments or replies

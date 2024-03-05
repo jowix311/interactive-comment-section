@@ -20,6 +20,9 @@ const theme = createTheme({
     },
   },
   palette: {
+    background: {
+      default: "hsl(228, 33%, 97%)",
+    },
     primary: {
       main: "hsl(238, 40%, 52%)", //moderateBlue
       light: "hsl(239, 57%, 85%)", //lightGrayishBlue
