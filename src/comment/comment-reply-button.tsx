@@ -6,11 +6,24 @@ const ReplyButton = styled(Button)(({ theme }) => ({
   textTransform: "none",
   "&:hover": { opacity: 0.5, backgroundColor: "transparent" },
 }));
+//TODO There is a bug in the code that when you click reply button multiple times it will create multiple reply areas
+interface CommentReplyButtonProps {
+  commentId: number | string;
+  handleReply: (commentId: number | string) => void;
+}
 
-const CommentReplyButton = () => {
+const CommentReplyButton = ({
+  commentId,
+  handleReply,
+}: CommentReplyButtonProps) => {
   return (
     <>
-      <ReplyButton startIcon={<IconReply />}>Reply</ReplyButton>
+      <ReplyButton
+        startIcon={<IconReply />}
+        onClick={() => handleReply(commentId)}
+      >
+        Reply
+      </ReplyButton>
     </>
   );
 };

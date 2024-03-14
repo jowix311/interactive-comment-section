@@ -7,22 +7,26 @@ import { useAppSelector, useAppDispatch } from "../store/hooks";
 import {
   upVoteComment,
   downVoteComment,
+  prepareNewComment,
   Comment as CommentType,
   Reply as ReplyType,
 } from "./comment.reducer";
+import CommentReplyArea from "./comment-reply-area";
+import { Fragment } from "react";
 
+//TODO revisit implementation
 const CommentContainer = styled(Box)(() => ({
-  display: "grid",
-  gap: "16px",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gridTemplateRows: "auto",
-  gridTemplateAreas: `"metadata metadata metadata"
-    "comment comment comment"
-    "control . reply"`,
-  marginBottom: "16px",
-  backgroundColor: "white",
-  borderRadius: "8px",
-  padding: "16px",
+  // display: "grid",
+  // gap: "16px",
+  // gridTemplateColumns: "repeat(3, 1fr)",
+  // gridTemplateRows: "auto",
+  // gridTemplateAreas: `"metadata metadata metadata"
+  //   "comment comment comment"
+  //   "control . reply"`,
+  // marginBottom: "16px",
+  // backgroundColor: "white",
+  // borderRadius: "8px",
+  // padding: "16px",
 }));
 
 const CommentSection = styled(Box)(() => ({}));
@@ -48,6 +52,10 @@ const Comment = () => {
         commentId: commentId,
       })
     );
+  };
+
+  const handleReply = (commentId: number | string) => {
+    dispatch(prepareNewComment({ commentId: commentId }));
   };
 
   // Prevent repeating codes for rendering parent comment  and replies
@@ -88,22 +96,42 @@ const Comment = () => {
           />
         </Box>
         <Box sx={{ gridArea: "reply", textAlign: "right" }}>
-          <CommentReplyButton />
+          <CommentReplyButton commentId={id} handleReply={handleReply} />
         </Box>
       </>
     );
+  };
+
+  
+  const renderCommentReply = (commentToReply: CommentType | ReplyType, reply: ReplyType) => {
+    if (reply.isNewComment) {
+      return (
+        <CommentContainer>
+          <CommentReplyArea commentToReply={commentToReply} reply={reply} />
+        </CommentContainer>
+      );
+    }
+
+    return <CommentContainer>{renderComment(reply)}</CommentContainer>;
   };
 
   //NOTE We could add some loading UI on the future
   return comments.map((comment: CommentType) => (
     <CommentSection as="section" key={comment.id}>
       <CommentContainer>{renderComment(comment)}</CommentContainer>
-      {comment.replies.length > 1 && (
+      {comment.replies?.length > 0 && (
         <CommentReplySection as="section">
           {comment.replies.map((reply: ReplyType) => (
-            <CommentContainer key={reply.id}>
-              {renderComment(reply)}
-            </CommentContainer>
+            <CommentSection as="section" key={reply.id}>
+              {renderCommentReply(comment, reply)}
+              <CommentReplySection>
+                {reply.replies.map((childReply: ReplyType) => (
+                  <Fragment key={childReply.id}>
+                    {renderComment(childReply)}
+                  </Fragment>
+                ))}
+              </CommentReplySection>
+            </CommentSection>
           ))}
         </CommentReplySection>
       )}

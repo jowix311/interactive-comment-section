@@ -78,3 +78,7 @@ Feb 22
 
 Mar 4
  - Added replies and refactored code for rendering comments or replies
+
+ mar 6
+ - Comment Reply function 
+ - Used toolkit's nanoid to generate random id
