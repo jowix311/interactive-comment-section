@@ -73,12 +73,19 @@ Feb 22
     - https://mui.com/system/grid/
 
   # Feb 24
+
   - learned some about vite program
     - https://vitejs.dev/guide/assets
 
 Mar 4
- - Added replies and refactored code for rendering comments or replies
 
- mar 6
- - Comment Reply function 
- - Used toolkit's nanoid to generate random id
+- Added replies and refactored code for rendering comments or replies
+
+mar 6
+
+- Comment Reply function
+- Used toolkit's nanoid to generate random id
+
+Mar 16
+
+- learned about using defaultValue prop when using uncontrolled form

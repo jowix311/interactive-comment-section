@@ -102,8 +102,10 @@ const Comment = () => {
     );
   };
 
-  
-  const renderCommentReply = (commentToReply: CommentType | ReplyType, reply: ReplyType) => {
+  const renderCommentReply = (
+    commentToReply: CommentType | ReplyType,
+    reply: ReplyType
+  ) => {
     if (reply.isNewComment) {
       return (
         <CommentContainer>
@@ -112,7 +114,7 @@ const Comment = () => {
       );
     }
 
-    return <CommentContainer>{renderComment(reply)}</CommentContainer>;
+    return <CommentContainer>{renderComment(reply)} xx</CommentContainer>;
   };
 
   //NOTE We could add some loading UI on the future
