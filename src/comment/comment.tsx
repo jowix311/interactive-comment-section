@@ -96,7 +96,12 @@ const Comment = () => {
           />
         </Box>
         <Box sx={{ gridArea: "reply", textAlign: "right" }}>
-          <CommentReplyButton commentId={id} handleReply={handleReply} />
+          <CommentReplyButton
+            commentId={id}
+            currentUser={currentUser}
+            commentReplyOwner={username}
+            handleReply={handleReply}
+          />
         </Box>
       </>
     );
@@ -114,7 +119,7 @@ const Comment = () => {
       );
     }
 
-    return <CommentContainer>{renderComment(reply)} xx</CommentContainer>;
+    return <CommentContainer>{renderComment(reply)}</CommentContainer>;
   };
 
   //NOTE We could add some loading UI on the future

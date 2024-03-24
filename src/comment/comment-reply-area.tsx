@@ -52,7 +52,7 @@ const CommentReplyArea = ({ commentToReply, reply }: CommentReplyAreaProps) => {
         defaultValue={initialReplyValue}
       />
       <Button variant="contained" onClick={handleCommentReply}>
-        Reply !!
+        Reply
       </Button>
     </Grid>
   );
