@@ -89,3 +89,8 @@ mar 6
 Mar 16
 
 - learned about using defaultValue prop when using uncontrolled form
+
+April 1
+
+- breakthrough on using recursion with help of AI
+- learned that IMMER will handle mutation no need to explicity re assigned the updated comment back to th state

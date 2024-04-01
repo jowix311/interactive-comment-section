@@ -111,6 +111,7 @@ const Comment = () => {
     commentToReply: CommentType | ReplyType,
     reply: ReplyType
   ) => {
+    console.log("reply", `${reply.id} ${reply.isNewComment}`);
     if (reply.isNewComment) {
       return (
         <CommentContainer>
@@ -134,7 +135,7 @@ const Comment = () => {
               <CommentReplySection>
                 {reply.replies.map((childReply: ReplyType) => (
                   <Fragment key={childReply.id}>
-                    {renderComment(childReply)}
+                    {renderCommentReply(reply, childReply)}
                   </Fragment>
                 ))}
               </CommentReplySection>

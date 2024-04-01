@@ -1,10 +1,40 @@
 import { nanoid } from "@reduxjs/toolkit";
 import { Comment, Reply, User } from "./comment.reducer";
 
+/**
+ * Handles the voting functionality for a comment.
+ * @param comments - The array of comments.
+ * @param targetCommentId - The ID of the target comment.
+ * @param isUpVoted - A boolean indicating whether the comment is being upvoted or downvoted.
+ * @returns A boolean indicating whether the vote was successfully handled.
+ */
+export const handleCommentVote = (
+  comments: Comment[],
+  targetCommentId: number | string,
+  isUpVoted: boolean
+) => {
+  for (const comment of comments) {
+    if (comment.id === targetCommentId) {
+      comment.hasUpVoted = isUpVoted;
+      comment.hasDownVoted = !isUpVoted;
+      comment.score = isUpVoted ? comment.score + 1 : comment.score - 1;
+      return true;
+    }
+
+    if (
+      comment.replies &&
+      handleCommentVote(comments, targetCommentId, isUpVoted)
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+};
 
 /**
  * Handles the creation of a new comment or reply.
- * 
+ *
  * @param comment - The comment or reply being replied to.
  * @param content - The content of the comment or reply.
  * @param currentUser - The user creating the comment or reply.
@@ -33,48 +63,76 @@ export const handleCommentReply = (
 };
 
 /**
- * Helps with preparing new comment by  pushing the initial details to the parent comment / reply.
- * Helps with updating the Prepared Comment when the user submit reply
- * This is for reply on rep
- *
- * @param targetCommentId - the id of the comment that is being replied to
- * @param content - the content of the reply text area
- * @param  isPreparingNewComment - boolean to check if the user is preparing a new comment or updating an existing one
- * @param currentUser - the current user
- * @return reply[] - the updated replies array
+ * Prepares a new comment by adding it to the comments array or its replies.
+ * @param comments - The array of comments or replies.
+ * @param targetCommentId - The ID of the target comment.
+ * @param content - The content of the new comment.
+ * @param currentUser - The current user.
+ * @param isPreparingNewComment - A boolean indicating if a new comment is being prepared.
+ * @returns A boolean indicating if the new comment was successfully added.
  */
-export const handleCommentReplyUpdate = (
-  targetCommentId: string | number,
-  comment: Comment,
-  isPreparingNewComment: boolean,
-  content: string,
-  currentUser: User
-): Reply[] => {
-  //handle scenario where replies is empty on target comment
-  if (comment.replies.length === 0) {
-    comment.replies.push(
-      handleCommentReply(comment, content, currentUser, isPreparingNewComment)
-    );
-    return comment.replies;
-  }
 
-  return comment.replies.map((reply) => {
-    if (isPreparingNewComment) {
-      // When replying for the first time, add a new reply to each existing reply
-      reply.replies.push(
-        handleCommentReply(reply, content, currentUser, isPreparingNewComment)
+export const prepareNewCommentById = (
+  comments: (Comment | Reply)[],
+  targetCommentId: string | number,
+  content: string,
+  currentUser: User,
+  isPreparingNewComment: boolean
+) => {
+  for (const comment of comments) {
+    if (comment.id === targetCommentId) {
+      comment.replies.push(
+        handleCommentReply(comment, content, currentUser, isPreparingNewComment)
       );
-    } else {
-      //update the existing reply
-      const targetCommentIdIndex = comment.replies.findIndex(
-        (reply) => reply.id === targetCommentId
-      );
-      if (targetCommentIdIndex !== -1) {
-        comment.replies[targetCommentIdIndex].content = content;
-        comment.replies[targetCommentIdIndex].isNewComment = false;
-      }
+      return true;
     }
 
-    return reply;
-  });
+    if (
+      comment.replies &&
+      prepareNewCommentById(
+        comment.replies,
+        targetCommentId,
+        content,
+        currentUser,
+        isPreparingNewComment
+      )
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+/**
+ * Updates a comment by its ID in the comments array.
+ * If the comment is found, its content is updated and the isNewComment flag is set to false.
+ * If the comment is not found, the function returns false.
+ *
+ * @param comments - The array of comments to search through.
+ * @param targetCommentId - The ID of the comment to update.
+ * @param content - The new content for the comment.
+ * @returns True if the comment was found and updated, false otherwise.
+ */
+export const updateCommentById = (
+  comments: (Comment | Reply)[],
+  targetCommentId: string | number,
+  content: string
+): boolean => {
+  for (const comment of comments) {
+    if (comment.id === targetCommentId) {
+      comment.content = content;
+      comment.isNewComment = false;
+      return true;
+    }
+
+    if (
+      comment.replies &&
+      updateCommentById(comment.replies, targetCommentId, content)
+    ) {
+      return true;
+    }
+  }
+
+  return false;
 };
