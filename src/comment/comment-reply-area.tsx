@@ -1,4 +1,4 @@
-import { Button, Grid, TextareaAutosize, styled } from "@mui/material";
+import { Box, Button, TextareaAutosize, styled } from "@mui/material";
 import { useRef } from "react";
 import { Reply, Comment, addComment } from "./comment.reducer";
 import { useAppDispatch } from "../store/hooks";
@@ -11,7 +11,10 @@ const MyTextArea = styled(TextareaAutosize)(({ theme }) => ({
   "&:focus": {
     outline: "none",
   },
+  resize: "vertical",
 }));
+
+const MyTextAreaContainer = styled(Box)(() => ({}));
 
 interface CommentReplyAreaProps {
   commentToReply: Comment | Reply;
@@ -44,7 +47,7 @@ const CommentReplyArea = ({ commentToReply, reply }: CommentReplyAreaProps) => {
 
   //minRows will define the height of the textarea
   return (
-    <Grid>
+    <MyTextAreaContainer>
       <MyTextArea
         minRows={6}
         ref={textAreaRef}
@@ -54,7 +57,7 @@ const CommentReplyArea = ({ commentToReply, reply }: CommentReplyAreaProps) => {
       <Button variant="contained" onClick={handleCommentReply}>
         Reply
       </Button>
-    </Grid>
+    </MyTextAreaContainer>
   );
 };
 

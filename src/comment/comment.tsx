@@ -12,10 +12,9 @@ import {
   Reply as ReplyType,
 } from "./comment.reducer";
 import CommentReplyArea from "./comment-reply-area";
-import { Fragment } from "react";
 
-//TODO revisit implementation
 const CommentContainer = styled(Box)(() => ({
+  //TODO: revisit implementation
   // display: "grid",
   // gap: "16px",
   // gridTemplateColumns: "repeat(3, 1fr)",
@@ -24,16 +23,32 @@ const CommentContainer = styled(Box)(() => ({
   //   "comment comment comment"
   //   "control . reply"`,
   // marginBottom: "16px",
-  // backgroundColor: "white",
-  // borderRadius: "8px",
-  // padding: "16px",
+  backgroundColor: "white",
+  borderRadius: "8px",
+  padding: "16px",
 }));
 
-const CommentSection = styled(Box)(() => ({}));
+const CommentSection = styled(Box)(() => ({
+  display: "grid",
+  gap: "16px",
+}));
 
 const CommentReplySection = styled(Box)(({ theme }) => ({
   borderLeft: `2px solid ${theme.palette.grey[50]}`,
   paddingLeft: "30px",
+  display: "grid",
+  gap: "16px",
+}));
+
+const CommentMetaDataArea = styled(Box)(() => ({
+  paddingBottom: "16px",
+}));
+
+//two column grid
+const CommentControlArea = styled(Box)(() => ({
+  paddingTop: "16px",
+  display: "flex",
+  justifyContent: "space-between",
 }));
 
 //NOTE we only support one level of replies for now
@@ -74,18 +89,18 @@ const Comment = () => {
     } = comment;
     return (
       <>
-        <Box sx={{ gridArea: "metadata" }}>
+        <CommentMetaDataArea sx={{ gridArea: "metadata" }}>
           <CommentMetaData
             profileImageSource={`../avatars/${png}`} //ideally image should be stored somewhere but for now we will use the public folder
             profileName={username}
             commentAge={createdAt}
             isOwnComment={currentUser.username === username}
           />
-        </Box>
+        </CommentMetaDataArea>
         <Box sx={{ gridArea: "comment" }}>
           <CommentContent commentText={content} />
         </Box>
-        <Box sx={{ gridArea: "control" }}>
+        <CommentControlArea sx={{ gridArea: "control" }}>
           <CommentVoteControl
             commentId={id}
             voteCount={score}
@@ -94,15 +109,15 @@ const Comment = () => {
             handleUpVote={handleCommentUpVote}
             handleDownVote={handleCommentDownVote}
           />
-        </Box>
-        <Box sx={{ gridArea: "reply", textAlign: "right" }}>
-          <CommentReplyButton
-            commentId={id}
-            currentUser={currentUser}
-            commentReplyOwner={username}
-            handleReply={handleReply}
-          />
-        </Box>
+          <Box sx={{ gridArea: "reply", textAlign: "right" }}>
+            <CommentReplyButton
+              commentId={id}
+              currentUser={currentUser}
+              commentReplyOwner={username}
+              handleReply={handleReply}
+            />
+          </Box>
+        </CommentControlArea>
       </>
     );
   };
@@ -111,7 +126,6 @@ const Comment = () => {
     commentToReply: CommentType | ReplyType,
     reply: ReplyType
   ) => {
-    console.log("reply", `${reply.id} ${reply.isNewComment}`);
     if (reply.isNewComment) {
       return (
         <CommentContainer>
@@ -134,9 +148,9 @@ const Comment = () => {
               {renderCommentReply(comment, reply)}
               <CommentReplySection>
                 {reply.replies.map((childReply: ReplyType) => (
-                  <Fragment key={childReply.id}>
+                  <Box key={childReply.id}>
                     {renderCommentReply(reply, childReply)}
-                  </Fragment>
+                  </Box>
                 ))}
               </CommentReplySection>
             </CommentSection>
