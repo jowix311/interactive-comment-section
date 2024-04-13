@@ -136,3 +136,22 @@ export const updateCommentById = (
 
   return false;
 };
+
+export const deleteCommentById = (
+  comments: Reply[],
+  targetCommentId: string | number
+): Reply[] => {
+  // Filter out the comment with the target ID
+  const filteredComments = comments.filter(
+    (comment) => comment.id !== targetCommentId
+  );
+
+  // For each remaining comment, if it has replies, recursively filter them as well
+  filteredComments.forEach((comment) => {
+    if (comment.replies) {
+      comment.replies = deleteCommentById(comment.replies, targetCommentId);
+    }
+  });
+
+  return filteredComments;
+};

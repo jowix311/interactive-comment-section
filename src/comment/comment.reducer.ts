@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
+  deleteCommentById,
   handleCommentVote,
   prepareNewCommentById,
   updateCommentById,
@@ -185,10 +186,24 @@ export const commentSlice = createSlice({
 
       return state;
     },
+    deleteComment: (state, action: PayloadAction<VotePayload>) => {
+      const { comments } = state;
+      const { commentId } = action.payload;
+
+      //delete comment by id
+      deleteCommentById(comments, commentId);
+      console.log(comments);
+      return state;
+    },
   },
 });
 
-export const { upVoteComment, downVoteComment, prepareNewComment, addComment } =
-  commentSlice.actions;
+export const {
+  upVoteComment,
+  downVoteComment,
+  prepareNewComment,
+  addComment,
+  deleteComment,
+} = commentSlice.actions;
 
 export const selectCommentReducer = commentSlice.reducer;

@@ -31,7 +31,7 @@ const VoteButtonContainer = styled(Grid)(({ theme }) => ({
   backgroundColor: theme.palette.grey[50],
   alignItems: "stretch", //items height 100%
   borderRadius: "6px",
-  maxWidth: "120px",
+  maxWidth: "86px",
 
   [theme.breakpoints.up("lg")]: {
     flexDirection: "column",

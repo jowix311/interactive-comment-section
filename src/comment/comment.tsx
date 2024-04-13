@@ -1,7 +1,7 @@
 import CommentVoteControl from "./comment-vote-control";
 import CommentMetaData from "./comment-meta-data";
 import CommentReplyButton from "./comment-reply-button";
-import { Box, styled } from "@mui/material";
+import { Box, Grid, IconButton, styled } from "@mui/material";
 import CommentContent from "./comment-content";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import {
@@ -10,8 +10,11 @@ import {
   prepareNewComment,
   Comment as CommentType,
   Reply as ReplyType,
+  deleteComment,
 } from "./comment.reducer";
 import CommentReplyArea from "./comment-reply-area";
+import IconDelete from "../assets/images/icon-delete.svg?react";
+import IconEdit from "../assets/images/icon-edit.svg?react";
 
 const CommentContainer = styled(Box)(() => ({
   //TODO: revisit implementation
@@ -51,6 +54,17 @@ const CommentControlArea = styled(Box)(() => ({
   justifyContent: "space-between",
 }));
 
+const CommentActionButton = styled(IconButton)(({ theme }) => ({
+  fontFamily: theme.typography.fontFamily,
+  fontSize: "16px",
+  fontWeight: 700,
+  // color: theme.palette.error.main,
+  gap: "8px",
+  ":hover": {
+    opacity: 0.5,
+  },
+}));
+
 //NOTE we only support one level of replies for now
 const Comment = () => {
   const { currentUser, comments } = useAppSelector((state) => state.comment);
@@ -71,6 +85,10 @@ const Comment = () => {
 
   const handleReply = (commentId: number | string) => {
     dispatch(prepareNewComment({ commentId: commentId }));
+  };
+
+  const handleCommentDelete = (commentId: number | string) => {
+    dispatch(deleteComment({ commentId: commentId }));
   };
 
   // Prevent repeating codes for rendering parent comment  and replies
@@ -117,6 +135,22 @@ const Comment = () => {
               handleReply={handleReply}
             />
           </Box>
+          {currentUser.username === username && (
+            <Grid>
+              <CommentActionButton
+                disableRipple
+                color="error"
+                onClick={() => handleCommentDelete(comment.id)}
+              >
+                <IconDelete />
+                Delete
+              </CommentActionButton>
+              <CommentActionButton disableRipple color="primary">
+                <IconEdit />
+                Edit
+              </CommentActionButton>
+            </Grid>
+          )}
         </CommentControlArea>
       </>
     );
