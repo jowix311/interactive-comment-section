@@ -23,7 +23,7 @@ export const handleCommentVote = (
 
     if (
       comment.replies &&
-      handleCommentVote(comments, targetCommentId, isUpVoted)
+      handleCommentVote(comment.replies, targetCommentId, isUpVoted) // Fix: Pass comment.replies instead of comments
     ) {
       return true;
     }
@@ -137,10 +137,18 @@ export const updateCommentById = (
   return false;
 };
 
+/**
+ * Deletes a comment by its ID from an array of comments and replies.
+ * If a comment has replies, it recursively deletes them as well.
+ *
+ * @param comments - The array of comments and replies.
+ * @param targetCommentId - The ID of the comment to delete.
+ * @returns The updated array of comments and replies after deletion.
+ */
 export const deleteCommentById = (
-  comments: Reply[],
+  comments: (Comment | Reply)[],
   targetCommentId: string | number
-): Reply[] => {
+): (Comment | Reply)[] => {
   // Filter out the comment with the target ID
   const filteredComments = comments.filter(
     (comment) => comment.id !== targetCommentId
@@ -149,7 +157,10 @@ export const deleteCommentById = (
   // For each remaining comment, if it has replies, recursively filter them as well
   filteredComments.forEach((comment) => {
     if (comment.replies) {
-      comment.replies = deleteCommentById(comment.replies, targetCommentId);
+      comment.replies = deleteCommentById(
+        comment.replies,
+        targetCommentId
+      ) as Reply[];
     }
   });
 

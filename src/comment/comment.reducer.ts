@@ -192,7 +192,6 @@ export const commentSlice = createSlice({
 
       //delete comment by id
       deleteCommentById(comments, commentId);
-      console.log(comments);
       return state;
     },
   },
