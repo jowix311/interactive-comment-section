@@ -25,9 +25,12 @@ const CommentReplyArea = ({ commentToReply, reply }: CommentReplyAreaProps) => {
   const dispatch = useAppDispatch();
   //get value of textarea on click using ref
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  console.log("11", reply.createdAt);
   const initialReplyValue = reply.isNewComment
-    ? `@${commentToReply.user.username} `
-    : "TODO: add here the message to update";
+    ? !reply.createdAt
+      ? `@${commentToReply.user.username} `
+      : reply.content
+    : "default value";
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     //TODO remove console log

@@ -29,7 +29,7 @@ const theme = createTheme({
     },
     secondary: {
       main: "hsl(212, 24%, 26%)", //darkBlue
-      light: "hsl(211, 10%, 45%)", //grayishBlue
+      light: "hsl(211, 10%, 45%)", // 
     },
     error: {
       main: "hsl(358, 79%, 66%)", //softRed

@@ -10,7 +10,9 @@ import {
   prepareNewComment,
   Comment as CommentType,
   Reply as ReplyType,
-  deleteComment,
+  // deleteComment,
+  prepareUpdateComment,
+  showCommentModal,
 } from "./comment.reducer";
 import CommentReplyArea from "./comment-reply-area";
 import IconDelete from "../assets/images/icon-delete.svg?react";
@@ -88,7 +90,12 @@ const Comment = () => {
   };
 
   const handleCommentDelete = (commentId: number | string) => {
-    dispatch(deleteComment({ commentId: commentId }));
+    // dispatch(deleteComment({ commentId: commentId })); //keeping for reference
+    dispatch(showCommentModal(commentId));
+  };
+
+  const handlePrepareComment = (commentId: number | string) => {
+    dispatch(prepareUpdateComment({ commentId: commentId }));
   };
 
   // Prevent repeating codes for rendering parent comment  and replies
@@ -145,7 +152,11 @@ const Comment = () => {
                 <IconDelete />
                 Delete
               </CommentActionButton>
-              <CommentActionButton disableRipple color="primary">
+              <CommentActionButton
+                disableRipple
+                color="primary"
+                onClick={() => handlePrepareComment(comment.id)}
+              >
                 <IconEdit />
                 Edit
               </CommentActionButton>
@@ -160,6 +171,16 @@ const Comment = () => {
     commentToReply: CommentType | ReplyType,
     reply: ReplyType
   ) => {
+    //for EDIT
+    if (reply.isNewComment && reply.createdAt) {
+      //TODO add profile
+      return (
+        <CommentContainer>
+          <CommentReplyArea commentToReply={commentToReply} reply={reply} />
+        </CommentContainer>
+      );
+    }
+    //for New Comment
     if (reply.isNewComment) {
       return (
         <CommentContainer>

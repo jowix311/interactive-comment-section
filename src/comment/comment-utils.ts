@@ -166,3 +166,24 @@ export const deleteCommentById = (
 
   return filteredComments;
 };
+
+export const prepareCommentForUpdate = (
+  comments: (Comment | Reply)[],
+  targetCommentId: string | number
+): boolean => {
+  for (const comment of comments) {
+    if (comment.id === targetCommentId) {
+      comment.isNewComment = true;
+      return true;
+    }
+
+    if (
+      comment.replies &&
+      prepareCommentForUpdate(comment.replies, targetCommentId)
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+};

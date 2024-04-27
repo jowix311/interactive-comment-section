@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
   deleteCommentById,
   handleCommentVote,
+  prepareCommentForUpdate,
   prepareNewCommentById,
   updateCommentById,
 } from "./comment-utils";
@@ -40,9 +41,15 @@ export type Comment = {
   isNewComment: boolean;
 };
 
+export type CommentModal = {
+  isOpen: boolean;
+  idToDelete: number | string;
+};
+
 type State = {
   currentUser: User;
   comments: Comment[];
+  commentModal: CommentModal;
 };
 
 type VotePayload = {
@@ -56,6 +63,10 @@ type AddCommentPayload = {
 
 //NOTE Simulate the API call
 const initialState: State = {
+  commentModal: {
+    isOpen: false,
+    idToDelete: "",
+  },
   currentUser: {
     image: {
       png: "./images/avatars/image-juliusomo.png",
@@ -186,12 +197,41 @@ export const commentSlice = createSlice({
 
       return state;
     },
-    deleteComment: (state, action: PayloadAction<VotePayload>) => {
+    prepareUpdateComment: (state, action) => {
       const { comments } = state;
       const { commentId } = action.payload;
 
-      //delete comment by id
-      deleteCommentById(comments, commentId);
+      //Note: mutate the comments from state, no need to reassign like state.comments = updateComments
+      prepareCommentForUpdate(comments, commentId);
+
+      return state;
+    },
+    // deleteComment: (state, action: PayloadAction<VotePayload>) => {
+    //   const { comments } = state;
+    //   const { commentId } = action.payload;
+
+    //   //delete comment by id
+    //   deleteCommentById(comments, commentId);
+    //   return state;
+    // }, //keeping for reference
+    deleteComment: (state) => {
+      const {
+        comments,
+        commentModal: { idToDelete },
+      } = state;
+
+      deleteCommentById(comments, idToDelete);
+      
+      return state;
+    },
+    showCommentModal: (state, action: PayloadAction<string | number>) => {
+      state.commentModal.isOpen = true;
+      state.commentModal.idToDelete = action.payload;
+      return state;
+    },
+    hideCommentModal: (state) => {
+      state.commentModal.isOpen = false;
+      state.commentModal.idToDelete = "";
       return state;
     },
   },
@@ -202,7 +242,10 @@ export const {
   downVoteComment,
   prepareNewComment,
   addComment,
+  prepareUpdateComment,
   deleteComment,
+  showCommentModal,
+  hideCommentModal,
 } = commentSlice.actions;
 
 export const selectCommentReducer = commentSlice.reducer;
