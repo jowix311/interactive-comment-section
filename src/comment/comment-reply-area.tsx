@@ -58,7 +58,7 @@ const CommentReplyArea = ({ commentToReply, reply }: CommentReplyAreaProps) => {
         defaultValue={initialReplyValue}
       />
       <Button variant="contained" onClick={handleCommentReply}>
-        Reply
+        {initialReplyValue === "" ? "Reply" : "Update"}
       </Button>
     </MyTextAreaContainer>
   );

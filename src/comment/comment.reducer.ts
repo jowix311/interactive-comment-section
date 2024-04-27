@@ -69,8 +69,8 @@ const initialState: State = {
   },
   currentUser: {
     image: {
-      png: "./images/avatars/image-juliusomo.png",
-      webp: "./images/avatars/image-juliusomo.webp",
+      png: "image-juliusomo.png",
+      webp: "image-juliusomo.webp",
     },
     username: "juliusomo",
   },
@@ -86,7 +86,7 @@ const initialState: State = {
       user: {
         image: {
           png: "image-amyrobson.png",
-          webp: "./images/avatars/image-amyrobson.webp",
+          webp: "image-amyrobson.webp",
         },
         username: "amyrobson",
       },
@@ -104,7 +104,7 @@ const initialState: State = {
       user: {
         image: {
           png: "image-maxblagun.png",
-          webp: "./images/avatars/image-maxblagun.webp",
+          webp: "image-maxblagun.webp",
         },
         username: "maxblagun",
       },
@@ -121,7 +121,7 @@ const initialState: State = {
           user: {
             image: {
               png: "image-ramsesmiron.png",
-              webp: "./images/avatars/image-ramsesmiron.webp",
+              webp: "image-ramsesmiron.webp",
             },
             username: "ramsesmiron",
           },
@@ -140,7 +140,7 @@ const initialState: State = {
           user: {
             image: {
               png: "image-juliusomo.png",
-              webp: "./images/avatars/image-juliusomo.webp",
+              webp: "image-juliusomo.webp",
             },
             username: "juliusomo",
           },
@@ -221,7 +221,7 @@ export const commentSlice = createSlice({
       } = state;
 
       deleteCommentById(comments, idToDelete);
-      
+
       return state;
     },
     showCommentModal: (state, action: PayloadAction<string | number>) => {

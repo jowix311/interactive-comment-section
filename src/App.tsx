@@ -1,4 +1,4 @@
-import { Box, Button, styled } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import "./App.css"; // TODO maybe remove this
 
 import Comment from "./comment/comment";
@@ -16,7 +16,6 @@ function App() {
         <Comment />
       </MasterCommentContainer>
 
-      <Button variant="contained">Send</Button>
       <CommentModal />
     </>
   );

@@ -18,7 +18,7 @@ import CommentReplyArea from "./comment-reply-area";
 import IconDelete from "../assets/images/icon-delete.svg?react";
 import IconEdit from "../assets/images/icon-edit.svg?react";
 
-const CommentContainer = styled(Box)(() => ({
+const CommentContainer = styled(Box)(({ theme }) => ({
   //TODO: revisit implementation
   // display: "grid",
   // gap: "16px",
@@ -31,6 +31,21 @@ const CommentContainer = styled(Box)(() => ({
   backgroundColor: "white",
   borderRadius: "8px",
   padding: "16px",
+  display: "grid",
+  gap: "16px",
+  gridTemplateColumns: "repeat(3, auto)",
+  gridTemplateRows: "auto",
+  gridTemplateAreas: `
+  "metadata metadata metadata"
+  "comment comment comment"
+  "control reply  reply"`,
+
+  [theme.breakpoints.up("md")]: {
+    gridTemplateAreas: `
+    "control metadata reply"
+    "control comment comment"
+    "control  comment comment"`,
+  },
 }));
 
 const CommentSection = styled(Box)(() => ({
@@ -51,7 +66,7 @@ const CommentMetaDataArea = styled(Box)(() => ({
 
 //two column grid
 const CommentControlArea = styled(Box)(() => ({
-  paddingTop: "16px",
+  //paddingTop: "16px",
   display: "flex",
   justifyContent: "space-between",
 }));
@@ -134,35 +149,37 @@ const Comment = () => {
             handleUpVote={handleCommentUpVote}
             handleDownVote={handleCommentDownVote}
           />
-          <Box sx={{ gridArea: "reply", textAlign: "right" }}>
-            <CommentReplyButton
-              commentId={id}
-              currentUser={currentUser}
-              commentReplyOwner={username}
-              handleReply={handleReply}
-            />
-          </Box>
-          {currentUser.username === username && (
-            <Grid>
-              <CommentActionButton
-                disableRipple
-                color="error"
-                onClick={() => handleCommentDelete(comment.id)}
-              >
-                <IconDelete />
-                Delete
-              </CommentActionButton>
-              <CommentActionButton
-                disableRipple
-                color="primary"
-                onClick={() => handlePrepareComment(comment.id)}
-              >
-                <IconEdit />
-                Edit
-              </CommentActionButton>
-            </Grid>
-          )}
         </CommentControlArea>
+        <Box sx={{ gridArea: "reply", textAlign: "right" }}>
+          <CommentReplyButton
+            commentId={id}
+            currentUser={currentUser}
+            commentReplyOwner={username}
+            handleReply={handleReply}
+          />
+          {currentUser.username === username && (
+            <Box sx={{ gridArea: "actions" }}>
+              <Grid>
+                <CommentActionButton
+                  disableRipple
+                  color="error"
+                  onClick={() => handleCommentDelete(comment.id)}
+                >
+                  <IconDelete />
+                  Delete
+                </CommentActionButton>
+                <CommentActionButton
+                  disableRipple
+                  color="primary"
+                  onClick={() => handlePrepareComment(comment.id)}
+                >
+                  <IconEdit />
+                  Edit
+                </CommentActionButton>
+              </Grid>
+            </Box>
+          )}
+        </Box>
       </>
     );
   };
