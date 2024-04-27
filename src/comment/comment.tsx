@@ -19,15 +19,6 @@ import IconDelete from "../assets/images/icon-delete.svg?react";
 import IconEdit from "../assets/images/icon-edit.svg?react";
 
 const CommentContainer = styled(Box)(({ theme }) => ({
-  //TODO: revisit implementation
-  // display: "grid",
-  // gap: "16px",
-  // gridTemplateColumns: "repeat(3, 1fr)",
-  // gridTemplateRows: "auto",
-  // gridTemplateAreas: `"metadata metadata metadata"
-  //   "comment comment comment"
-  //   "control . reply"`,
-  // marginBottom: "16px",
   backgroundColor: "white",
   borderRadius: "8px",
   padding: "16px",
@@ -41,6 +32,7 @@ const CommentContainer = styled(Box)(({ theme }) => ({
   "control reply  reply"`,
 
   [theme.breakpoints.up("md")]: {
+    gridTemplateColumns: "min-content 1fr auto",
     gridTemplateAreas: `
     "control metadata reply"
     "control comment comment"
