@@ -1,96 +1,68 @@
-# React + TypeScript + Vite
+# Frontend Mentor - Interactive comments section solution
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a solution to the [Interactive comments section challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-Currently, two official plugins are available:
+## Table of contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
 
-## Expanding the ESLint configuration
+**Note: Delete this note and update the table of contents based on what sections you keep.**
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Overview
 
-- Configure the top-level `parserOptions` property like this:
+### The challenge
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
+Users should be able to:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- View the optimal layout for the app depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Create, Read, Update, and Delete comments and replies
+- Upvote and downvote comments
+- **Bonus**: If you're building a purely front-end project, use `localStorage` to save the current state in the browser that persists when the browser is refreshed.
+- **Bonus**: Instead of using the `createdAt` strings from the `data.json` file, try using timestamps and dynamically track the time since the comment or reply was posted.
 
-Feb 18
+### Screenshot
 
-- MUI
-- Adding font with MUI and get know about font source https://fontsource.org/fonts/rubik/install
-  - https://blog.logrocket.com/add-custom-fonts-mui/
-  - https://surajsharma.net/blog/react-material-ui-custom-font
-  - search for allVairants: https://stackoverflow.com/questions/48319372/changing-font-family-of-all-material-ui-components
-  - adding custom Palette https://stackoverflow.com/questions/50069724/how-to-add-custom-material-ui-palette-colors
-- COOL override example https://mui.com/material-ui/react-grid/
+Please see the live site URL below.
 
-Feb 20
+### Links
 
-- Learned how to add custom SVF to MUI using SvgIconm
-- Figuring how to use SVGR on vite
-  - https://stackoverflow.com/questions/38510443/how-to-use-an-svg-file-in-a-svgicon-in-material-ui
-  - https://www.npmjs.com/package/vite-plugin-svgr
-  - https://stackoverflow.com/questions/74720726/type-definition-for-vite-plugin-svgr
-- IconSVG not centered
-  - https://stackoverflow.com/questions/64327446/how-to-center-align-a-custom-svg-icon-in-a-material-ui-iconbutton
-- SVG viewbox
-  - https://www.youtube.com/watch?v=6LCUStriM_o
-- Went a ahead and use button and icon combo
+- Solution URL: [https://github.com/jowix311/interactive-comment-section](https://your-solution-url.com)
+- Live Site URL: [https://interactive-comment-section-jowix311.netlify.app/](https://your-live-site-url.com)
 
-Feb 22
+## My process
 
-- Make MUI bold https://surajsharma.net/blog/react-material-ui-typography-bold
+### Built with
 
-- Methods (https://www.youtube.com/watch?v=HsdjivqQ7BA)
+- Responsive or mobile friendly approach
+- ReactJS
+- Redux Toolkit - for state management
+- MUI - for the styling
+- Date-FNS - to get date difference
+- Netlify - to host the challenge website
 
-  - #1 component props
-  - #2 using `sx` prop
-  - #3 using styled function (if you fin using sx to messy)
-  - #4 CSS function of EmotionUI css={css`background-color: red`}
-    - you need to add extra rule sto remove linting errors
-  - #5 Normal CSS
-  - #6 CSS modules (to co locate CSS e.g., page.module.css)
-  - #7 Theme (suggested way!)
+### What I learned
 
-  Feb 23
+- I learned to use MUI from setting it up, setting the initial theme, using its the out of the box components and overriding them as I see fit.
+- I learned to use Redux Toolkit persist middleware for local storage and use it to manage my state.
+- Pace myself and do the challenge small step at time, since I admit the challenge was hard for me.
 
-  - MUI grid template name
-    - https://mui.com/system/grid/
+### Continued development
 
-  # Feb 24
+- Clean the code and refactor them.
+- Maybe style the site better.
 
-  - learned some about vite program
-    - https://vitejs.dev/guide/assets
+## Author
 
-Mar 4
-
-- Added replies and refactored code for rendering comments or replies
-
-mar 6
-
-- Comment Reply function
-- Used toolkit's nanoid to generate random id
-
-Mar 16
-
-- learned about using defaultValue prop when using uncontrolled form
-
-April 1
-
-- breakthrough on using recursion with help of AI
-- learned that IMMER will handle mutation no need to explicity re assigned the updated comment back to th state
+- Website - [https://jowi-englis.vercel.app/](https://www.your-site.com)
+- Frontend Mentor - [@jowix311](https://www.frontendmentor.io/profile/jowix311)
