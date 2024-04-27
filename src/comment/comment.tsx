@@ -184,7 +184,7 @@ const Comment = () => {
     if (reply.isNewComment && reply.createdAt) {
       //TODO add profile
       return (
-        <CommentContainer>
+        <CommentContainer sx={{ gridTemplateColumns: "1fr !important" }}>
           <CommentReplyArea commentToReply={commentToReply} reply={reply} />
         </CommentContainer>
       );
