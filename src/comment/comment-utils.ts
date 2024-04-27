@@ -51,7 +51,10 @@ export const handleCommentReply = (
   return {
     id: isPreparingNewComment ? nanoid() : id, //we use random  ID generator from toolkit
     content: content,
-    createdAt: "This should be coming from the server",
+    createdAt: !comment.createdAt
+      ? comment.createdAt
+      : new Date().toISOString(),
+    //"createdAt should be coming from the server",
     score: 0,
     hasUpVoted: false,
     hasDownVoted: false,

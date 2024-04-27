@@ -1,4 +1,5 @@
 import { Avatar, Box, Grid, Typography, styled } from "@mui/material";
+import CommentAgeing from "./comment-ageing";
 
 interface CommentMetaDataProps {
   profileImageSource: string;
@@ -12,9 +13,7 @@ const ProfileName = styled(Typography)(({ theme }) => ({
   color: theme.palette.secondary.light,
 }));
 
-const CommentAge = styled(Typography)(({ theme }) => ({
-  color: theme.palette.secondary.light,
-}));
+
 
 const ProfileBadge = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
@@ -42,7 +41,9 @@ const CommentMetaData = ({
       <Avatar alt={profileName} src={profileImageSource} />
       <ProfileName>{profileName}</ProfileName>
       {isOwnComment && <ProfileBadge>you</ProfileBadge>}
-      <CommentAge>{commentAge}</CommentAge>
+   
+        <CommentAgeing commentAge={commentAge} />
+    
     </Grid>
   );
 };
